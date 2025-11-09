@@ -15,7 +15,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://rewrite.sandervreeken.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://masqify.io'),
   title: {
     default: "Masqify - Your Story, Securely Told",
     template: "%s | Masqify"

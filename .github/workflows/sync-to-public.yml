@@ -16,7 +16,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.PRIVATE_REPO_PAT }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

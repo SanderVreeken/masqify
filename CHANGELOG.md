@@ -5,6 +5,21 @@ All notable changes to Masqify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2025-11-09
+
+### Changed
+- Updated all branding from rewrite.sandervreeken.com to masqify.io
+- Updated email sender addresses to hello@masqify.io for all Resend emails
+- Updated GitHub repository references to github.com/SanderVreeken/masqify
+- Updated Privacy Policy and Terms of Service with correct GitHub repository links
+- Updated structured data, sitemap, and robots.txt with new domain
+- Updated all email templates with new masqify.io domain
+
+### Fixed
+- GitHub Actions workflow authentication error (removed unnecessary token requirement)
+- Email verification templates now reference correct domain
+- Security email address updated to security@masqify.io
+
 ## [0.1.1] - 2025-11-09
 
 ### Added

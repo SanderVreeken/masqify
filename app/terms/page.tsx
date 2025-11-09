@@ -40,12 +40,12 @@ export default function TermsOfServicePage() {
               <p className="text-muted-foreground mb-2">
                 <strong>Source Code Repository:</strong>{" "}
                 <a
-                  href="[GITHUB_REPOSITORY_URL]"
+                  href="https://github.com/SanderVreeken/masqify"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary underline"
                 >
-                  [GITHUB_REPOSITORY_URL]
+                  github.com/SanderVreeken/masqify
                 </a>
               </p>
               <p className="text-muted-foreground mb-2">

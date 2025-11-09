@@ -15,7 +15,7 @@ export const auth = betterAuth({
   baseURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   trustedOrigins: [
     "http://localhost:3000",
-    "https://rewrite.sandervreeken.com"
+    "https://masqify.io"
   ],
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -24,7 +24,7 @@ export const auth = betterAuth({
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
       await resend.emails.send({
-        from: 'Masqify <no-reply@bun-web.sandervreeken.com>',
+        from: 'Masqify <hello@masqify.io>',
         to: user.email,
         subject: 'Verify your email address',
         html: VerifyEmail(user.name, url),
@@ -40,7 +40,7 @@ export const auth = betterAuth({
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
       await resend.emails.send({
-        from: 'Masqify <no-reply@bun-web.sandervreeken.com>',
+        from: 'Masqify <hello@masqify.io>',
         to: user.email,
         subject: 'Reset your password',
         html: ResetPasswordEmail(user.name, url),

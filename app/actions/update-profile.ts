@@ -325,7 +325,7 @@ export async function updateEmail(formData: FormData): Promise<ActionResult> {
 
     // Send verification email to the NEW email address
     await resend.emails.send({
-      from: "Rewrite <no-reply@bun-web.sandervreeken.com>",
+      from: "Masqify <hello@masqify.io>",
       to: newEmail,
       subject: "Verify your new email address",
       html: ChangeEmailVerification(session.user.name, newEmail, verificationUrl),

@@ -66,12 +66,12 @@ export default function PrivacyPolicyPage() {
                 <p className="text-sm">
                   <strong>Source Code Repository:</strong>{" "}
                   <a
-                    href="[GITHUB_REPOSITORY_URL]"
+                    href="https://github.com/SanderVreeken/masqify"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary underline"
                   >
-                    [GITHUB_REPOSITORY_URL]
+                    github.com/SanderVreeken/masqify
                   </a>
                 </p>
                 <p className="text-sm text-muted-foreground mt-2">

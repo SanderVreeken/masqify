@@ -5,15 +5,15 @@ export function OrganizationStructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Masqify",
-    "url": "https://rewrite.sandervreeken.com",
-    "logo": "https://rewrite.sandervreeken.com/logo.png",
+    "url": "https://masqify.io",
+    "logo": "https://masqify.io/logo.png",
     "description": "Privacy-first storytelling companion that masks sensitive information while transforming your narrative",
     "founder": {
       "@type": "Person",
       "name": "Sander Vreeken"
     },
     "sameAs": [
-      "https://github.com/sandervreeken"
+      "https://github.com/SanderVreeken/masqify"
     ]
   }
 
@@ -54,7 +54,7 @@ export function SoftwareApplicationStructuredData() {
       "Open-source and verifiable",
       "Zero-knowledge architecture"
     ],
-    "screenshot": "https://rewrite.sandervreeken.com/screenshot.png",
+    "screenshot": "https://masqify.io/screenshot.png",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
@@ -80,13 +80,13 @@ export function WebSiteStructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Masqify",
-    "url": "https://rewrite.sandervreeken.com",
+    "url": "https://masqify.io",
     "description": "Privacy-first storytelling companion. Your sensitive data never leaves your browser.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://rewrite.sandervreeken.com/editor?q={search_term_string}"
+        "urlTemplate": "https://masqify.io/editor?q={search_term_string}"
       },
       "query-input": "required name=search_term_string"
     }

@@ -10,7 +10,7 @@
   [![Next.js](https://img.shields.io/badge/Next.js-16.0-black.svg)](https://nextjs.org/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
 
-  [Website](https://rewrite.sandervreeken.com) • [Documentation](#documentation) • [Report Issue](https://github.com/YOUR_USERNAME/masqify/issues)
+  [Website](https://masqify.io) • [Documentation](#documentation) • [Report Issue](https://github.com/SanderVreeken/masqify/issues)
 </div>
 
 ---
@@ -161,7 +161,7 @@ Refine employee communications while maintaining confidentiality and GDPR compli
 
 ### For Users
 
-1. **Visit** [rewrite.sandervreeken.com](https://rewrite.sandervreeken.com)
+1. **Visit** [masqify.io](https://masqify.io)
 2. **Create** a free account
 3. **Add funds** to your balance
 4. **Start rewriting** with complete privacy
@@ -178,7 +178,7 @@ Refine employee communications while maintaining confidentiality and GDPR compli
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/masqify.git
+git clone https://github.com/SanderVreeken/masqify.git
 cd masqify
 
 # Install dependencies
@@ -239,8 +239,8 @@ SENTRY_DSN=your-sentry-dsn
 
 ## 📚 Documentation
 
-- **[Privacy Policy](https://rewrite.sandervreeken.com/privacy)** - Detailed privacy architecture explanation
-- **[Terms of Service](https://rewrite.sandervreeken.com/terms)** - Clear terms with privacy guarantees
+- **[Privacy Policy](https://masqify.io/privacy)** - Detailed privacy architecture explanation
+- **[Terms of Service](https://masqify.io/terms)** - Clear terms with privacy guarantees
 - **[Architecture Guide](docs/ARCHITECTURE.md)** - Technical implementation details
 - **[Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
 
@@ -258,20 +258,20 @@ While this project is open-source for transparency, contributions are welcome! P
 
 This source code is available for **transparency and verification purposes only**.
 
-**Not licensed for redistribution or commercial use.** See [Terms of Service](https://rewrite.sandervreeken.com/terms) for details.
+**Not licensed for redistribution or commercial use.** See [Terms of Service](https://masqify.io/terms) for details.
 
 ## 👤 Author
 
 **Sander Vreeken**
 
-- Website: [rewrite.sandervreeken.com](https://rewrite.sandervreeken.com)
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+- Website: [masqify.io](https://masqify.io)
+- GitHub: [@SanderVreeken](https://github.com/SanderVreeken)
 
 ## 🐛 Support & Issues
 
-- **Found a bug?** [Open an issue](https://github.com/YOUR_USERNAME/masqify/issues)
+- **Found a bug?** [Open an issue](https://github.com/SanderVreeken/masqify/issues)
 - **Have a question?** Contact us through the platform
-- **Security concern?** Please email security@sandervreeken.com
+- **Security concern?** Please email security@masqify.io
 
 ## 🙏 Acknowledgments
 
@@ -284,5 +284,5 @@ This source code is available for **transparency and verification purposes only*
 <div align="center">
   <strong>Built with privacy in mind 🔒</strong>
   <br><br>
-  <sub>Version 0.1.1 | Made with ❤️ by Sander Vreeken</sub>
+  <sub>Version 0.1.2 | Made with ❤️ by Sander Vreeken</sub>
 </div>

@@ -4,7 +4,7 @@ export function ChangeEmailVerification(userName: string | undefined, newEmail: 
       <!-- Header -->
       <div style="padding: 40px 32px 32px; text-align: center; border-bottom: 1px solid #e5e7eb;">
         <div style="margin-bottom: 16px;">
-          <img src="${process.env.NEXT_PUBLIC_APP_URL || 'https://rewrite.sandervreeken.com'}/masqify-logo.svg" alt="Masqify" width="48" height="48" style="display: inline-block;"/>
+          <img src="${process.env.NEXT_PUBLIC_APP_URL || 'https://masqify.io'}/masqify-logo.svg" alt="Masqify" width="48" height="48" style="display: inline-block;"/>
         </div>
         <h1 style="color: #111827; margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.5px;">Masqify</h1>
         <p style="color: #6b7280; margin: 8px 0 0 0; font-size: 14px;">Your Story, Securely Told</p>
