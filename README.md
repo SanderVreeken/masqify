@@ -284,5 +284,5 @@ This source code is available for **transparency and verification purposes only*
 <div align="center">
   <strong>Built with privacy in mind 🔒</strong>
   <br><br>
-  <sub>Version 0.1.3 | Made with ❤️ by Sander Vreeken</sub>
+  <sub>Version 0.1.4 | Made with ❤️ by Sander Vreeken</sub>
 </div>
