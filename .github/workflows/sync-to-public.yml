@@ -1,0 +1,156 @@
+name: Sync to Public Repository on Version Change
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'package.json'
+
+jobs:
+  check-version-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout private repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PRIVATE_REPO_PAT }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Get current version
+        id: current_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $VERSION"
+
+      - name: Check if version tag already exists in public repo
+        id: check_tag
+        env:
+          PUBLIC_REPO_PAT: ${{ secrets.PUBLIC_REPO_PAT }}
+          PUBLIC_REPO_OWNER: ${{ secrets.PUBLIC_REPO_OWNER }}
+          PUBLIC_REPO_NAME: ${{ secrets.PUBLIC_REPO_NAME }}
+        run: |
+          VERSION=${{ steps.current_version.outputs.version }}
+
+          # Check if tag exists in public repo
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token $PUBLIC_REPO_PAT" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$PUBLIC_REPO_OWNER/$PUBLIC_REPO_NAME/git/refs/tags/v$VERSION")
+
+          if [ "$STATUS_CODE" = "200" ]; then
+            echo "tag_exists=true" >> $GITHUB_OUTPUT
+            echo "Version v$VERSION already exists in public repository. Skipping sync."
+          else
+            echo "tag_exists=false" >> $GITHUB_OUTPUT
+            echo "Version v$VERSION is new. Proceeding with sync."
+          fi
+
+      - name: Extract changelog for current version
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        id: extract_changelog
+        run: |
+          VERSION=${{ steps.current_version.outputs.version }}
+
+          # Extract the changelog section for this version
+          if [ -f CHANGELOG.md ]; then
+            CHANGELOG_CONTENT=$(awk -v ver="[$VERSION]" '
+              $0 ~ ver {found=1; next}
+              found && /^## \[/ {exit}
+              found {print}
+            ' CHANGELOG.md | sed '/^$/d' | head -c 4000)
+          else
+            CHANGELOG_CONTENT=""
+          fi
+
+          # If CHANGELOG.md doesn't exist or version not found, use a default message
+          if [ -z "$CHANGELOG_CONTENT" ]; then
+            CHANGELOG_CONTENT="Release version $VERSION - See the full changelog at CHANGELOG.md"
+          fi
+
+          # Save to file to preserve formatting
+          echo "$CHANGELOG_CONTENT" > /tmp/release_notes.txt
+          echo "Release notes extracted for version $VERSION"
+
+      - name: Setup git config
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Clone public repository
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        env:
+          PUBLIC_REPO_PAT: ${{ secrets.PUBLIC_REPO_PAT }}
+          PUBLIC_REPO_OWNER: ${{ secrets.PUBLIC_REPO_OWNER }}
+          PUBLIC_REPO_NAME: ${{ secrets.PUBLIC_REPO_NAME }}
+        run: |
+          git clone "https://$PUBLIC_REPO_PAT@github.com/$PUBLIC_REPO_OWNER/$PUBLIC_REPO_NAME.git" public-repo
+
+      - name: Copy files to public repository
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          # Remove all files except .git directory
+          find public-repo -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+
+          # Copy all files from private repo except .git and .env files
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.env' \
+            --exclude='.env.local' \
+            --exclude='.env.*.local' \
+            --exclude='node_modules' \
+            --exclude='.next' \
+            ./ public-repo/
+
+          echo "Files synchronized to public repository"
+
+      - name: Commit and push to public repository
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        env:
+          VERSION: ${{ steps.current_version.outputs.version }}
+        run: |
+          cd public-repo
+
+          # Check if there are any changes
+          if [[ -n $(git status -s) ]]; then
+            git add .
+            git commit -m "Release v$VERSION"
+            git push origin main
+            echo "Changes committed and pushed"
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Create GitHub Release
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        env:
+          PUBLIC_REPO_PAT: ${{ secrets.PUBLIC_REPO_PAT }}
+          PUBLIC_REPO_OWNER: ${{ secrets.PUBLIC_REPO_OWNER }}
+          PUBLIC_REPO_NAME: ${{ secrets.PUBLIC_REPO_NAME }}
+          VERSION: ${{ steps.current_version.outputs.version }}
+        run: |
+          # Read release notes and escape for JSON
+          RELEASE_NOTES=$(cat /tmp/release_notes.txt | jq -Rs .)
+
+          # Create the release using GitHub API
+          curl -X POST \
+            -H "Authorization: token $PUBLIC_REPO_PAT" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$PUBLIC_REPO_OWNER/$PUBLIC_REPO_NAME/releases" \
+            -d "{\"tag_name\":\"v$VERSION\",\"name\":\"v$VERSION\",\"body\":$RELEASE_NOTES,\"draft\":false,\"prerelease\":false}"
+
+          echo "Release v$VERSION created successfully"
+
+      - name: Summary
+        if: steps.check_tag.outputs.tag_exists == 'false'
+        run: |
+          echo "✅ Successfully synced version ${{ steps.current_version.outputs.version }} to public repository"
+          echo "✅ Created release v${{ steps.current_version.outputs.version }}"

@@ -1,0 +1,30 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Open book shape -->
+  <path d="M8 10 L8 38 C8 38 12 35 24 35 C36 35 40 38 40 38 L40 10 C40 10 36 13 24 13 C12 13 8 10 8 10 Z" fill="none" stroke="#6b7280" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Center spine -->
+  <line x1="24" y1="13" x2="24" y2="35" stroke="#6b7280" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Left page - Line 1: normal text then masked -->
+  <line x1="12" y1="18" x2="16" y2="18" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="17" y="17" width="4" height="2.5" rx="1.25" fill="#4b5563"/>
+
+  <!-- Left page - Line 2: masked in middle -->
+  <line x1="12" y1="22" x2="14" y2="22" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="15" y="21" width="5" height="2.5" rx="1.25" fill="#4b5563"/>
+  <line x1="20.5" y1="22" x2="21.5" y2="22" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Left page - Line 3: normal text -->
+  <line x1="12" y1="26" x2="19" y2="26" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Right page - Line 1: normal then masked -->
+  <line x1="28" y1="18" x2="32" y2="18" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="33" y="17" width="3" height="2.5" rx="1.25" fill="#4b5563"/>
+
+  <!-- Right page - Line 2: mostly masked -->
+  <rect x="28" y="21" width="6" height="2.5" rx="1.25" fill="#4b5563"/>
+  <line x1="35" y1="22" x2="36" y2="22" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Right page - Line 3: normal text -->
+  <line x1="28" y1="26" x2="34" y2="26" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,40 @@
+# Changelog
+
+All notable changes to Masqify will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.1] - 2025-11-09
+
+### Added
+- GitHub Actions workflow for automatic syncing to public repository
+- Professional README.md with comprehensive documentation
+- CHANGELOG.md for tracking version history
+- Automated release creation with version tags
+
+### Changed
+- Enhanced README with visual elements, badges, and better organization
+- Improved documentation structure for open-source transparency
+
+## [0.1.0] - 2025-11-09
+
+### Added
+- Initial release of Masqify
+- Privacy-first storytelling companion with client-side data protection
+- Client-side sensitive data masking and restoration
+- AI-powered text rewriting using OpenAI API
+- User authentication with Better Auth and 2FA support
+- Stripe payment integration for credit-based system
+- PostgreSQL database with Drizzle ORM
+- Email notifications via Resend
+- Error tracking with Sentry (configured to filter user input)
+- Comprehensive privacy guarantees and zero-knowledge architecture
+- Open-source codebase for transparency and verification
+
+### Security
+- HTTPS-only connections
+- Secure session management with CSRF protection
+- Rate limiting on authentication endpoints
+- Two-factor authentication support
+- Password hashing with industry-standard algorithms
