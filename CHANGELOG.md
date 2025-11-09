@@ -5,7 +5,7 @@ All notable changes to Masqify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.2] - 2025-11-09
+## [0.1.3] - 2025-11-09
 
 ### Changed
 - Updated all branding from rewrite.sandervreeken.com to masqify.io
@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - GitHub Actions workflow authentication error (removed unnecessary token requirement)
+- GitHub Actions git clone authentication using oauth2 protocol
 - Email verification templates now reference correct domain
 - Security email address updated to security@masqify.io
 

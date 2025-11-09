@@ -87,11 +87,9 @@ jobs:
       - name: Clone public repository
         if: steps.check_tag.outputs.tag_exists == 'false'
         env:
-          PUBLIC_REPO_PAT: ${{ secrets.PUBLIC_REPO_PAT }}
-          PUBLIC_REPO_OWNER: ${{ secrets.PUBLIC_REPO_OWNER }}
-          PUBLIC_REPO_NAME: ${{ secrets.PUBLIC_REPO_NAME }}
+          GH_TOKEN: ${{ secrets.PUBLIC_REPO_PAT }}
         run: |
-          git clone "https://$PUBLIC_REPO_PAT@github.com/$PUBLIC_REPO_OWNER/$PUBLIC_REPO_NAME.git" public-repo
+          git clone "https://oauth2:${{ secrets.PUBLIC_REPO_PAT }}@github.com/${{ secrets.PUBLIC_REPO_OWNER }}/${{ secrets.PUBLIC_REPO_NAME }}.git" public-repo
 
       - name: Copy files to public repository
         if: steps.check_tag.outputs.tag_exists == 'false'
