@@ -5,7 +5,7 @@
 
   ### Your Story, Securely Told
 
-  [![License](https://img.shields.io/badge/license-Proprietary-blue.svg)](LICENSE)
+  [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](LICENSE.txt)
   [![Node.js](https://img.shields.io/badge/node-%3E%3D20.9.0-brightgreen.svg)](https://nodejs.org/)
   [![Next.js](https://img.shields.io/badge/Next.js-16.0-black.svg)](https://nextjs.org/)
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
@@ -256,9 +256,15 @@ While this project is open-source for transparency, contributions are welcome! P
 
 ## 📄 License
 
-This source code is available for **transparency and verification purposes only**.
+This project is licensed under the **GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later)**.
 
-**Not licensed for redistribution or commercial use.** See [Terms of Service](https://masqify.io/terms) for details.
+This means:
+- ✅ You can use, modify, and distribute this software
+- ✅ The code is open source for transparency and trust
+- ⚖️ If you modify and deploy this as a service, you **must** release your source code under AGPL-3.0
+- 🔒 This protects against commercial exploitation while keeping the project open
+
+See [LICENSE.txt](LICENSE.txt) for the full license text.
 
 ## 👤 Author
 
@@ -284,5 +290,5 @@ This source code is available for **transparency and verification purposes only*
 <div align="center">
   <strong>Built with privacy in mind 🔒</strong>
   <br><br>
-  <sub>Version 0.1.5 | Made with ❤️ by Sander Vreeken</sub>
+  <sub>Version 0.1.6 | Made with ❤️ by Sander Vreeken</sub>
 </div>
