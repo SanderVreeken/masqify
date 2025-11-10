@@ -8,7 +8,7 @@ import { verification, user } from "@/lib/db/auth-schema"
 import { eq, and } from "drizzle-orm"
 import { nanoid } from "nanoid"
 import { Resend } from "resend"
-import { ChangeEmailVerification } from "@/lib/emails/change-email"
+import { ChangeEmailVerification, ChangeEmailVerificationText } from "@/lib/emails/change-email"
 import { checkRateLimit } from "@/lib/rate-limit"
 import type { ActionResult } from "./types"
 
@@ -329,6 +329,7 @@ export async function updateEmail(formData: FormData): Promise<ActionResult> {
       to: newEmail,
       subject: "Verify your new email address",
       html: ChangeEmailVerification(session.user.name, newEmail, verificationUrl),
+      text: ChangeEmailVerificationText(session.user.name, newEmail, verificationUrl),
     })
 
     return {

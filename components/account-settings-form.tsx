@@ -20,7 +20,8 @@ import {
   CheckCircle,
   AlertCircle,
   Chrome,
-  Link as LinkIcon
+  Link as LinkIcon,
+  Trash2
 } from "lucide-react"
 import {
   Tooltip,
@@ -33,6 +34,16 @@ import { authClient } from "@/lib/auth-client"
 import { TwoFactorSetup } from "@/components/two-factor-setup"
 import { TwoFactorDisable } from "@/components/two-factor-disable"
 import { updateName, updatePassword, updateEmail } from "@/app/actions/update-profile"
+import { initiateAccountDeletion } from "@/app/actions/delete-account"
+import { getBalance } from "@/app/actions/balance"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 interface User {
   id: string
@@ -64,6 +75,9 @@ export function AccountSettingsForm({ user }: AccountSettingsFormProps) {
   const [hasPasswordAccount, setHasPasswordAccount] = useState(true)
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(true)
   const [connectedAccounts, setConnectedAccounts] = useState<any[]>([])
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+  const [userBalance, setUserBalance] = useState<number>(0)
 
   // Form states
   const [name, setName] = useState(user?.name || "")
@@ -119,6 +133,22 @@ export function AccountSettingsForm({ user }: AccountSettingsFormProps) {
     }
 
     checkAccounts()
+  }, [])
+
+  // Fetch user balance
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const result = await getBalance()
+        if (result.success && result.balance !== undefined) {
+          setUserBalance(result.balance)
+        }
+      } catch (error) {
+        console.error("Error fetching balance:", error)
+      }
+    }
+
+    fetchBalance()
   }, [])
 
   const handleUpdateName = async (e: React.FormEvent) => {
@@ -239,6 +269,26 @@ export function AccountSettingsForm({ user }: AccountSettingsFormProps) {
       toast.error("Failed to export transactions. Please try again.")
     } finally {
       setIsLoadingData(false)
+    }
+  }
+
+  const handleDeleteAccount = async () => {
+    setIsLoadingDelete(true)
+
+    try {
+      const result = await initiateAccountDeletion()
+
+      if (result.success) {
+        toast.success(result.message)
+        setDeleteDialogOpen(false)
+      } else {
+        toast.error(result.error)
+      }
+    } catch (error) {
+      console.error("Error initiating account deletion:", error)
+      toast.error("Failed to initiate account deletion. Please try again.")
+    } finally {
+      setIsLoadingDelete(false)
     }
   }
 
@@ -655,6 +705,110 @@ export function AccountSettingsForm({ user }: AccountSettingsFormProps) {
           )}
         </CardContent>
       </Card>
+
+      <Separator />
+
+      {/* Delete Account - Danger Zone */}
+      <Card className="border-destructive">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-destructive">
+            <Trash2 className="h-5 w-5" />
+            Delete Account
+          </CardTitle>
+          <CardDescription>
+            Permanently delete your account and all associated data. This action cannot be undone.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-4">
+              <h4 className="font-semibold text-destructive mb-2">Warning: This action is permanent</h4>
+              <p className="text-sm text-muted-foreground mb-3">
+                Deleting your account will:
+              </p>
+              <ul className="text-sm text-muted-foreground space-y-1 ml-4">
+                <li>• Permanently delete all your personal information</li>
+                <li>• Remove all your rewrite history</li>
+                <li>• Delete all transaction records</li>
+                {userBalance > 0 && (
+                  <li className="text-destructive font-semibold">
+                    • Forfeit your current balance of ${userBalance.toFixed(2)} (non-refundable)
+                  </li>
+                )}
+                <li>• Disconnect all linked accounts (Google, etc.)</li>
+                <li>• Sign you out of all active sessions</li>
+              </ul>
+              <p className="text-sm text-muted-foreground mt-3">
+                You will receive an email confirmation link. Your account will only be deleted after you click the confirmation link.
+              </p>
+            </div>
+
+            <div className="flex justify-end">
+              <Button
+                variant="destructive"
+                onClick={() => setDeleteDialogOpen(true)}
+              >
+                <Trash2 className="h-4 w-4 mr-2" />
+                Delete Account
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Delete Account Confirmation Dialog */}
+      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="text-destructive">Are you absolutely sure?</DialogTitle>
+            <DialogDescription>
+              This will initiate the account deletion process. You will receive a confirmation email
+              that you must click to complete the deletion.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {userBalance > 0 && (
+              <div className="rounded-lg border-2 border-destructive bg-destructive/10 p-4">
+                <p className="font-semibold text-destructive mb-2">
+                  You will lose ${userBalance.toFixed(2)}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Your current account balance will be permanently forfeited and cannot be refunded.
+                  By proceeding, you acknowledge that you waive all rights to these funds.
+                </p>
+              </div>
+            )}
+
+            <div className="rounded-lg border bg-muted/50 p-4">
+              <p className="text-sm font-medium mb-2">What happens next:</p>
+              <ol className="text-sm text-muted-foreground space-y-1 ml-4 list-decimal">
+                <li>We'll send a confirmation email to {session?.user?.email}</li>
+                <li>Click the link in the email within 24 hours to confirm deletion</li>
+                <li>Your account and all data will be permanently deleted</li>
+                <li>You'll be signed out and can no longer access this account</li>
+              </ol>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setDeleteDialogOpen(false)}
+              disabled={isLoadingDelete}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={handleDeleteAccount}
+              disabled={isLoadingDelete}
+            >
+              {isLoadingDelete ? "Sending Email..." : "Send Confirmation Email"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* 2FA Setup Dialog */}
       <TwoFactorSetup

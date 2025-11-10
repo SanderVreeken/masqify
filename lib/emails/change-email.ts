@@ -1,3 +1,23 @@
+export function ChangeEmailVerificationText(userName: string | undefined, newEmail: string, verificationUrl: string): string {
+  return `
+Hi ${userName || 'there'},
+
+We received a request to change your email address to:
+
+${newEmail}
+
+To complete this change, please verify your new email address by clicking the link below:
+
+${verificationUrl}
+
+Security Notice: This verification link will expire in 1 hour.
+
+If you didn't request an email change, please contact support immediately. Your current email address will remain unchanged.
+
+© ${new Date().getFullYear()} Masqify. All rights reserved.
+  `.trim();
+}
+
 export function ChangeEmailVerification(userName: string | undefined, newEmail: string, verificationUrl: string): string {
   return `
     <div style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif; background-color: #ffffff;">

@@ -10,7 +10,7 @@ on:
 jobs:
   check-version-and-sync:
     runs-on: ubuntu-latest
-    # Only run in the private repository, not in the public one
+    # Only run in the private source repository (masqify-dev), not in the public destination (masqify)
     if: github.repository == 'SanderVreeken/masqify-dev'
 
     steps:

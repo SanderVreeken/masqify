@@ -1,3 +1,19 @@
+export function VerifyEmailText(userName: string | undefined, verificationUrl: string): string {
+  return `
+Hi ${userName || 'there'},
+
+Welcome to Masqify! Please verify your email address to complete your registration and start using the platform.
+
+To verify your email, click the link below:
+
+${verificationUrl}
+
+If you didn't create a Masqify account, you can safely ignore this email.
+
+© ${new Date().getFullYear()} Masqify. All rights reserved.
+  `.trim();
+}
+
 export function VerifyEmail(userName: string | undefined, verificationUrl: string): string {
   return `
     <div style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif; background-color: #ffffff;">

@@ -1,3 +1,19 @@
+export function ResetPasswordEmailText(userName: string | undefined, resetUrl: string): string {
+  return `
+Hi ${userName || 'there'},
+
+We received a request to reset your password. Click the link below to create a new password for your Masqify account:
+
+${resetUrl}
+
+Security Notice: This password reset link will expire in 1 hour.
+
+If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
+
+© ${new Date().getFullYear()} Masqify. All rights reserved.
+  `.trim();
+}
+
 export function ResetPasswordEmail(userName: string | undefined, resetUrl: string): string {
   return `
     <div style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif; background-color: #ffffff;">

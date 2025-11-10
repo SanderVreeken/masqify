@@ -6,8 +6,8 @@ import { twoFactor, admin } from "better-auth/plugins";
 import { Resend } from "resend";
 import { db } from "./db";
 import * as schema from "./db/auth-schema";
-import { VerifyEmail } from "./emails/verify-email";
-import { ResetPasswordEmail } from "./emails/reset-password";
+import { VerifyEmail, VerifyEmailText } from "./emails/verify-email";
+import { ResetPasswordEmail, ResetPasswordEmailText } from "./emails/reset-password";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -28,6 +28,7 @@ export const auth = betterAuth({
         to: user.email,
         subject: 'Verify your email address',
         html: VerifyEmail(user.name, url),
+        text: VerifyEmailText(user.name, url),
       })
     },
     sendOnSignUp: true,
@@ -44,6 +45,7 @@ export const auth = betterAuth({
         to: user.email,
         subject: 'Reset your password',
         html: ResetPasswordEmail(user.name, url),
+        text: ResetPasswordEmailText(user.name, url),
       })
     },
   },

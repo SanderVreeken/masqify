@@ -232,11 +232,52 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">9. Account Termination</h2>
-              <p className="text-muted-foreground">
-                We may terminate or suspend your account and access to the Service immediately, without prior notice or
-                liability, for any reason whatsoever, including without limitation if you breach the Terms of Service.
-              </p>
+              <h2 className="text-xl font-semibold mb-3">9. Account Termination and Deletion</h2>
+              <div className="space-y-3">
+                <div>
+                  <h3 className="font-semibold text-base mb-2">9.1 Termination by Us</h3>
+                  <p className="text-muted-foreground">
+                    We may terminate or suspend your account and access to the Service immediately, without prior notice or
+                    liability, for any reason whatsoever, including without limitation if you breach the Terms of Service.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-base mb-2">9.2 Account Deletion by User</h3>
+                  <p className="text-muted-foreground">
+                    You may request deletion of your account at any time through your account settings. Account deletion
+                    requires email confirmation and is permanent and irreversible.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-base mb-2">9.3 Forfeiture of Unused Funds</h3>
+                  <p className="text-muted-foreground">
+                    <strong>IMPORTANT:</strong> Upon account deletion, any remaining account balance or unused credits will
+                    be permanently forfeited and cannot be refunded or recovered. By deleting your account, you explicitly
+                    waive any and all rights to claim, recover, or receive compensation for unused funds or credits
+                    associated with your account.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-base mb-2">9.4 Data Deletion</h3>
+                  <p className="text-muted-foreground">
+                    When you delete your account, all associated data including your profile information, transaction
+                    history, and account settings will be permanently deleted from our systems. Some information may be
+                    retained for legal, tax, or regulatory compliance purposes as required by law.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-base mb-2">9.5 No Liability for Account Deletion</h3>
+                  <p className="text-muted-foreground">
+                    We are not liable for any losses, damages, or consequences resulting from account termination or
+                    deletion, whether initiated by you or by us. This includes but is not limited to loss of access to the
+                    Service, loss of unused credits, or loss of data.
+                  </p>
+                </div>
+              </div>
             </section>
 
             <section>
