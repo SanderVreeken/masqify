@@ -98,6 +98,16 @@ export default function TermsOfServicePage() {
 
             <section>
               <h2 className="text-xl font-semibold mb-3">4. No Warranty and Limitation of Liability</h2>
+
+              <div className="p-4 bg-red-50 dark:bg-red-950/20 rounded-lg border border-red-200 dark:border-red-900 mb-4">
+                <p className="text-sm font-semibold text-red-700 dark:text-red-400 mb-2">⚠️ CRITICAL: NO WARRANTIES OR GUARANTEES</p>
+                <p className="text-sm text-muted-foreground">
+                  <strong>YOU USE THIS SERVICE ENTIRELY AT YOUR OWN RISK.</strong> While we implement security best practices
+                  and make the source code available for review, we make absolutely no warranties or guarantees about the
+                  security, privacy, accuracy, or reliability of this service.
+                </p>
+              </div>
+
               <div className="space-y-3">
                 <div>
                   <h3 className="font-semibold text-base mb-2">4.1 "AS IS" Basis</h3>
@@ -105,12 +115,33 @@ export default function TermsOfServicePage() {
                     THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT ANY WARRANTIES OF ANY KIND,
                     WHETHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW, WE DISCLAIM ALL
                     WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY,
-                    FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+                    FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, SECURITY, PRIVACY PROTECTION, AND DATA SAFETY.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-base mb-2">4.2 No Guarantee of Accuracy</h3>
+                  <h3 className="font-semibold text-base mb-2">4.2 No Security or Privacy Guarantees</h3>
+                  <p className="text-muted-foreground mb-2">
+                    <strong>WE MAKE NO WARRANTIES OR GUARANTEES REGARDING THE SECURITY OR PRIVACY OF YOUR DATA.</strong>
+                    Despite our best efforts to implement privacy-first architecture and security measures, we cannot
+                    guarantee that:
+                  </p>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-4">
+                    <li>Your sensitive data will remain private or secure</li>
+                    <li>The application is free from bugs, vulnerabilities, or security flaws</li>
+                    <li>Data leaks or breaches will not occur</li>
+                    <li>Third-party services (OpenAI, Stripe, Sentry, etc.) will not access or expose your data</li>
+                    <li>Our privacy architecture will function as intended in all circumstances</li>
+                  </ul>
+                  <p className="text-muted-foreground mt-2">
+                    We encourage you to review our <a href="/security" className="text-primary underline">Security Architecture</a>,
+                    inspect the <a href="https://github.com/SanderVreeken/masqify" target="_blank" rel="noopener noreferrer" className="text-primary underline">source code</a>,
+                    and make your own determination about whether this service is appropriate for your use case.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-base mb-2">4.3 No Guarantee of Accuracy</h3>
                   <p className="text-muted-foreground">
                     We do not warrant that the Service will be error-free, uninterrupted, or that the rewritten text
                     will be accurate, appropriate, or suitable for your purposes. The quality and appropriateness of
@@ -119,7 +150,23 @@ export default function TermsOfServicePage() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-base mb-2">4.3 No Liability for Errors or Mistakes</h3>
+                  <h3 className="font-semibold text-base mb-2">4.4 No Liability for Data Breaches or Security Issues</h3>
+                  <p className="text-muted-foreground mb-2">
+                    <strong>WE ARE NOT LIABLE FOR ANY DATA BREACHES, SECURITY VULNERABILITIES, OR PRIVACY VIOLATIONS</strong>
+                    that may occur, whether due to:
+                  </p>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-4">
+                    <li>Software bugs or coding errors in our application</li>
+                    <li>Security vulnerabilities in our code or third-party dependencies</li>
+                    <li>Breaches or failures of third-party services (OpenAI, Stripe, Sentry, infrastructure providers)</li>
+                    <li>Human error in configuration, deployment, or maintenance</li>
+                    <li>Attacks, exploits, or unauthorized access by malicious actors</li>
+                    <li>Any other circumstances, foreseen or unforeseen</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-base mb-2">4.5 No Liability for Errors or Mistakes</h3>
                   <p className="text-muted-foreground">
                     WE SHALL NOT BE LIABLE FOR ANY ERRORS, MISTAKES, INACCURACIES, OR INAPPROPRIATE CONTENT IN THE
                     REWRITTEN TEXT. YOU ACKNOWLEDGE THAT AI-GENERATED CONTENT MAY CONTAIN ERRORS OR PRODUCE UNEXPECTED
@@ -128,7 +175,7 @@ export default function TermsOfServicePage() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-base mb-2">4.4 Limitation of Liability</h3>
+                  <h3 className="font-semibold text-base mb-2">4.6 Limitation of Liability</h3>
                   <p className="text-muted-foreground">
                     IN NO EVENT SHALL THE SERVICE PROVIDER, ITS DIRECTORS, EMPLOYEES, PARTNERS, AGENTS, SUPPLIERS, OR
                     AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES,
@@ -140,17 +187,20 @@ export default function TermsOfServicePage() {
                     <li>Any conduct or content of any third party on the Service</li>
                     <li>Any content obtained from the Service</li>
                     <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+                    <li>Data breaches, security vulnerabilities, or privacy violations</li>
+                    <li>Exposure, leakage, or unauthorized access to your sensitive data</li>
                     <li>Errors, mistakes, or inaccuracies in the rewritten text</li>
-                    <li>Any consequences arising from your use or reliance on the rewritten text</li>
+                    <li>Any consequences arising from your use or reliance on the rewritten text or the Service</li>
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-base mb-2">4.5 Maximum Liability</h3>
+                  <h3 className="font-semibold text-base mb-2">4.7 Maximum Liability</h3>
                   <p className="text-muted-foreground">
                     TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL OUR TOTAL LIABILITY TO YOU FOR
-                    ALL DAMAGES, LOSSES, AND CAUSES OF ACTION EXCEED THE AMOUNT YOU HAVE PAID US IN THE LAST TWELVE
-                    (12) MONTHS, OR ONE HUNDRED DOLLARS ($100), WHICHEVER IS LESS.
+                    ALL DAMAGES, LOSSES, AND CAUSES OF ACTION (WHETHER IN CONTRACT, TORT, INCLUDING NEGLIGENCE, OR OTHERWISE)
+                    EXCEED THE AMOUNT YOU HAVE PAID US IN THE LAST TWELVE (12) MONTHS, OR ONE HUNDRED DOLLARS ($100),
+                    WHICHEVER IS LESS.
                   </p>
                 </div>
               </div>

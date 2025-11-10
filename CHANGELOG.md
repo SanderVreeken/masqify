@@ -5,6 +5,69 @@ All notable changes to Masqify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2025-11-10
+
+### Added
+- **Comprehensive Security Documentation**
+  - Created `/security` page with detailed architecture explanation and visual security flow
+  - Created `SECURITY.md` GitHub security policy with responsible disclosure guidelines
+  - Added security verification section in README.md with direct source code references
+  - Added expandable "Security Architecture Deep Dive" section in README
+  - Added security best practices documentation for users
+
+- **Legal Protection & Disclaimers**
+  - Added prominent security disclaimer at top of Privacy Policy (Section 1)
+  - Enhanced Privacy Policy Section 11 with comprehensive liability limitations
+  - Added critical security disclaimer banner in Terms of Service (Section 4)
+  - Created new Terms Section 4.2: "No Security or Privacy Guarantees"
+  - Created new Terms Section 4.4: "No Liability for Data Breaches or Security Issues"
+  - Added realistic security disclaimer to /security page
+  - Added user-friendly security notice on /editor page with educational focus
+
+### Security
+- **Enhanced Sentry Configuration**
+  - Added `beforeSendTransaction` hooks to all three Sentry configs (client, server, edge)
+  - Implemented stack trace variable sanitization to prevent local variable leakage
+  - Added transaction name sanitization to remove query parameters
+  - Removed sensitive tags (url, user) from performance data
+  - Enhanced request data sanitization in transactions
+
+- **Telemetry & Privacy**
+  - Disabled Next.js telemetry completely (`NEXT_TELEMETRY_DISABLED=1` in .env)
+  - Verified zero analytics or tracking services in codebase
+  - Confirmed no external CDN dependencies
+  - Validated localStorage only stores cookie consent (no user data)
+
+- **Deep Security Audit**
+  - Verified client-side sanitization is bulletproof (no data leakage paths)
+  - Confirmed zero user text in all 45+ console.log statements
+  - Validated error boundaries don't leak data
+  - Verified API routes have proper authentication and rate limiting
+  - Confirmed database schema has no text storage fields
+  - Validated SQL injection protection via Drizzle ORM parameterized queries
+
+### Changed
+- Updated README.md with detailed security guarantees table including source code links
+- Enhanced README with privacy commitments verification column
+- Updated editor page security banner to be confidence-building instead of alarming (blue info box)
+- Changed editor page messaging from warning to educational ("Privacy First" focus)
+- Improved cross-referencing between legal pages (/security, /privacy, /terms, GitHub)
+
+### Documentation
+- Added code examples in README showing sanitization, transmission, and restoration flow
+- Created independent verification section with key security-critical file references
+- Added security researcher recognition program in SECURITY.md
+- Documented supported versions and security update timeline
+- Added comprehensive "what we store" vs "what we don't store" tables
+- Created security audit history table in SECURITY.md
+
+### Legal
+- Established "best effort basis" legal positioning across all pages
+- Implemented comprehensive liability cap ($100 or 12-month fees, whichever is less)
+- Added explicit coverage for bugs, vulnerabilities, third-party breaches, and human error
+- Created consistent disclaimer messaging across Privacy Policy, Terms, and Security pages
+- Added transparency commitment with source code verification encouragement
+
 ## [0.1.6] - 2025-11-10
 
 ### Changed

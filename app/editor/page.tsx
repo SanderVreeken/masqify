@@ -40,6 +40,15 @@ export default function EditorPage() {
             <p className="mt-2 text-sm text-muted-foreground">
               Mark sensitive information, then let AI improve your text while keeping your data private.
             </p>
+            <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950/20 rounded border border-blue-200 dark:border-blue-900">
+              <p className="text-xs text-muted-foreground">
+                <strong>🔒 Privacy First:</strong> Your sensitive data is masked in your browser before being sent to AI.
+                Learn more about{" "}
+                <a href="/security" className="text-primary underline font-medium">how we protect your data</a>
+                {" "}or review our{" "}
+                <a href="https://github.com/SanderVreeken/masqify" target="_blank" rel="noopener noreferrer" className="text-primary underline font-medium">open-source code</a>.
+              </p>
+            </div>
           </div>
           <TextRewriter />
         </div>

@@ -138,24 +138,130 @@ Refine employee communications while maintaining confidentiality and GDPR compli
 
 ### Privacy Commitments
 
-| Guarantee | Status |
-|-----------|--------|
-| Sensitive data never leaves your browser | ✅ Verified |
-| Only sanitized placeholders sent to servers | ✅ Verified |
-| No text content stored permanently | ✅ Verified |
-| No analytics or tracking services | ✅ Verified |
-| No session recordings or keystroke logging | ✅ Verified |
-| Sentry configured to filter all user input | ✅ Verified |
-| OpenAI only sees generic placeholders | ✅ Verified |
+| Guarantee | Status | Verification |
+|-----------|--------|--------------|
+| Sensitive data never leaves your browser | ✅ Verified | [text-rewriter.tsx:86-95](components/text-rewriter.tsx#L86-L95) |
+| Only sanitized placeholders sent to servers | ✅ Verified | [text-rewriter.tsx:105](components/text-rewriter.tsx#L105) |
+| No text content stored permanently | ✅ Verified | [rewrite/route.ts:189-199](app/api/rewrite/route.ts#L189-L199) |
+| No analytics or tracking services | ✅ Verified | No analytics code found |
+| No session recordings or keystroke logging | ✅ Verified | [sentry config](instrumentation-client.ts#L12) |
+| Sentry configured to filter all user input | ✅ Verified | [beforeSend hooks](instrumentation-client.ts#L28-L76) |
+| OpenAI only sees generic placeholders | ✅ Verified | [rewrite/route.ts:94-108](app/api/rewrite/route.ts#L94-L108) |
+| No telemetry or data collection | ✅ Verified | Next.js telemetry disabled |
 
 ### Security Features
 
-- 🔒 HTTPS-only connections
-- 🔑 Secure session management with CSRF protection
-- ⏱️ Rate limiting on authentication endpoints
-- 🛡️ Two-factor authentication (2FA) support
-- 🚫 Account ban functionality
-- 🔐 Industry-standard password hashing (bcrypt)
+- 🔒 **HTTPS-only connections** - All data in transit is encrypted
+- 🔑 **Secure session management** - HTTP-only cookies with CSRF protection
+- ⏱️ **Rate limiting** - 20 requests/hour per user to prevent abuse ([rewrite/route.ts:44-73](app/api/rewrite/route.ts#L44-L73))
+- 🛡️ **Two-factor authentication (2FA)** - Optional TOTP-based 2FA support
+- 🚫 **Account ban functionality** - Admin controls for security
+- 🔐 **Password security** - Bcrypt hashing with secure salting
+- 🗄️ **SQL injection protection** - Drizzle ORM with parameterized queries
+- 🚨 **Error sanitization** - No user data in error logs ([rewrite/route.ts:164-165](app/api/rewrite/route.ts#L164-L165))
+- 🎯 **Input validation** - Server-side validation on all inputs
+- 🔍 **Security headers** - CORS, CSP, and other security headers configured
+
+### Security Architecture Deep Dive
+
+<details>
+<summary><strong>🔒 How We Protect Your Data (Click to Expand)</strong></summary>
+
+#### Client-Side Protection Layer
+
+**1. Sanitization Process** ([text-rewriter.tsx:86-95](components/text-rewriter.tsx#L86-L95))
+```typescript
+// User marks sensitive data, browser replaces with placeholders
+let sanitized = text
+for (const item of sortedItems) {
+  sanitized = sanitized.slice(0, item.startIndex) +
+              item.placeholder +
+              sanitized.slice(item.endIndex)
+}
+// Result: "Contact [REDACTED-1] at [REDACTED-2]"
+```
+
+**2. Network Transmission** ([text-rewriter.tsx:105](components/text-rewriter.tsx#L105))
+```typescript
+// ONLY sanitized text is sent
+fetch("/api/rewrite", {
+  body: JSON.stringify({ text: sanitizedText })  // No original data!
+})
+```
+
+**3. Response Restoration** ([text-rewriter.tsx:146-150](components/text-rewriter.tsx#L146-L150))
+```typescript
+// Client-side restoration of original data
+let final = data.text
+for (const item of sensitiveItems) {
+  final = final.replaceAll(item.placeholder, item.text)
+}
+```
+
+#### Server-Side Protection Layer
+
+**No Text Storage** ([lib/balance.ts:189-199](lib/balance.ts#L189-L199))
+```typescript
+// Database stores ONLY metadata, never text content
+await db.insert(rewrite).values({
+  inputLength,     // Character count only
+  outputLength,    // Character count only
+  tokensUsed,      // Token count only
+  totalCost,       // Cost only
+  metadata: { inputTokens, outputTokens }  // Technical data only
+  // NO text field - content is never stored!
+})
+```
+
+**Error Sanitization** ([rewrite/route.ts:164-165](app/api/rewrite/route.ts#L164-L165))
+```typescript
+// Errors logged without user text
+console.error("Error:", error instanceof Error ?
+  error.constructor.name :  // Type only
+  "Unknown error")          // No user data!
+```
+
+**Rate Limiting** ([rewrite/route.ts:44-73](app/api/rewrite/route.ts#L44-L73))
+```typescript
+// 20 requests per hour per user/IP
+const rateLimitResult = await checkRateLimit({
+  endpoint: '/api/rewrite',
+  limit: 20,
+  windowSeconds: 3600
+}, session.user.id, clientIp)
+```
+
+#### Third-Party Service Protection
+
+**Sentry (Error Tracking)** - Configured to filter all user input:
+- ✅ Stack trace variables removed ([instrumentation-client.ts:61-73](instrumentation-client.ts#L61-L73))
+- ✅ Request data stripped ([instrumentation-client.ts:42-47](instrumentation-client.ts#L42-L47))
+- ✅ Breadcrumbs sanitized ([instrumentation-client.ts:106-122](instrumentation-client.ts#L106-L122))
+- ✅ Transaction data cleaned ([instrumentation-client.ts:78-103](instrumentation-client.ts#L78-L103))
+
+**OpenAI API** - Only receives placeholder text:
+- ✅ System prompt preserves placeholders ([rewrite/route.ts:98-100](app/api/rewrite/route.ts#L98-L100))
+- ✅ Server forwards sanitized text only ([rewrite/route.ts:94-108](app/api/rewrite/route.ts#L94-L108))
+- ✅ No access to original sensitive data
+
+**Stripe (Payments)** - Completely separate from text processing:
+- ✅ No user text data sent to Stripe
+- ✅ Only payment metadata transmitted
+- ✅ PCI-compliant handling
+
+</details>
+
+### Independent Verification
+
+All security claims can be verified by reviewing the source code. Key security-critical files:
+
+| Component | File | Purpose |
+|-----------|------|---------|
+| Client Sanitization | [components/text-rewriter.tsx](components/text-rewriter.tsx) | Masks data before transmission |
+| Server API | [app/api/rewrite/route.ts](app/api/rewrite/route.ts) | Processes only placeholders |
+| Database Schema | [lib/db/schema.ts](lib/db/schema.ts) | No text storage fields |
+| Error Tracking Config | [instrumentation-client.ts](instrumentation-client.ts) | Sentry data filtering |
+| Rate Limiting | [lib/rate-limit.ts](lib/rate-limit.ts) | Abuse prevention |
 
 ## 🚀 Getting Started
 
@@ -290,5 +396,5 @@ See [LICENSE.txt](LICENSE.txt) for the full license text.
 <div align="center">
   <strong>Built with privacy in mind 🔒</strong>
   <br><br>
-  <sub>Version 0.1.6 | Made with ❤️ by Sander Vreeken</sub>
+  <sub>Version 0.1.7 | Made with ❤️ by Sander Vreeken</sub>
 </div>

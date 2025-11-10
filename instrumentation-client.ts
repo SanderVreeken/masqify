@@ -58,7 +58,48 @@ Sentry.init({
     // Remove user information
     delete event.user;
 
+    // PRIVACY: Sanitize stack traces to remove local variables
+    if (event.exception?.values) {
+      event.exception.values = event.exception.values.map(exception => {
+        if (exception.stacktrace?.frames) {
+          exception.stacktrace.frames = exception.stacktrace.frames.map(frame => {
+            // Remove local variables from stack frames
+            if (frame.vars) delete frame.vars;
+            return frame;
+          });
+        }
+        return exception;
+      });
+    }
+
     return event;
+  },
+
+  // PRIVACY: Sanitize performance transaction names to prevent data leakage
+  beforeSendTransaction(transaction) {
+    // Remove query parameters from transaction names
+    if (transaction.transaction && transaction.transaction.includes('?')) {
+      transaction.transaction = transaction.transaction.split('?')[0];
+    }
+
+    // Remove any tags that might contain sensitive data
+    if (transaction.tags) {
+      delete transaction.tags.url;
+      delete transaction.tags.user;
+    }
+
+    // Remove request data from transactions
+    if (transaction.request) {
+      delete transaction.request.data;
+      delete transaction.request.cookies;
+      delete transaction.request.headers;
+      // Keep URL but remove query parameters
+      if (transaction.request.url) {
+        transaction.request.url = transaction.request.url.split('?')[0];
+      }
+    }
+
+    return transaction;
   },
 
   // PRIVACY: Scrub sensitive data from breadcrumbs

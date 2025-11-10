@@ -86,6 +86,7 @@ export async function POST(req: NextRequest) {
               description: `Add €${amount.toFixed(2)} to your account balance`,
             },
             unit_amount: amountInCents,
+            tax_behavior: "inclusive", // Tax is included in the price (common in EU)
           },
           quantity: 1,
         },
@@ -95,6 +96,9 @@ export async function POST(req: NextRequest) {
       cancel_url: baseCancelUrl,
       customer_email: session.user.email,
       client_reference_id: session.user.id, // Link to user
+      automatic_tax: {
+        enabled: true,
+      },
       payment_intent_data: {
         description: `Masqify Account Credits - €${amount.toFixed(2)}`, // Appears on receipt
       },

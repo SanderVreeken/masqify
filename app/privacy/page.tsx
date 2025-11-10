@@ -53,6 +53,28 @@ export default function PrivacyPolicyPage() {
                 our text rewriting service ("Service"). We are committed to transparency and have made our entire
                 source code available for public review to allow you to independently verify our privacy practices.
               </p>
+
+              <div className="mt-4 p-4 bg-orange-50 dark:bg-orange-950/20 rounded-lg border border-orange-200 dark:border-orange-900">
+                <p className="text-sm font-semibold mb-2">⚠️ Important Disclaimer</p>
+                <p className="text-sm text-muted-foreground mb-3">
+                  While we implement industry best practices and have designed our system with privacy as a core principle,
+                  <strong> no system is 100% secure and no guarantees can be made</strong>. We make every effort to protect
+                  your data, but we cannot be held responsible for any potential security vulnerabilities, bugs, or data leaks
+                  that may occur despite our best efforts.
+                </p>
+                <p className="text-sm text-muted-foreground mb-3">
+                  We encourage you to:
+                </p>
+                <ul className="text-sm text-muted-foreground space-y-1 ml-4 mb-3">
+                  <li>• Review our <a href="/security" className="text-primary underline">Security Architecture</a> to understand how we protect your data</li>
+                  <li>• Inspect our <a href="https://github.com/SanderVreeken/masqify" target="_blank" rel="noopener noreferrer" className="text-primary underline">open-source code</a> to verify our implementation</li>
+                  <li>• Use your professional judgment about whether this service is appropriate for your specific use case</li>
+                  <li>• Understand that you use this service at your own risk</li>
+                </ul>
+                <p className="text-sm text-muted-foreground">
+                  See our <a href="/terms" className="text-primary underline">Terms of Service</a> for complete liability limitations.
+                </p>
+              </div>
             </section>
 
             <section>
@@ -361,21 +383,48 @@ export default function PrivacyPolicyPage() {
 
             <section>
               <h2 className="text-xl font-semibold mb-3">11. Disclaimer of Liability</h2>
-              <p className="text-muted-foreground">
-                While we make every effort to protect your privacy and have designed our system to not store sensitive
-                text content, WE MAKE NO WARRANTIES OR GUARANTEES REGARDING DATA SECURITY OR PRIVACY. You can verify
-                our implementation by reviewing the open-source code, but YOU USE THE SERVICE AT YOUR OWN RISK. We are
-                not liable for any data breaches, unauthorized access, or privacy violations that may occur despite our
-                security measures.
+              <div className="p-4 bg-red-50 dark:bg-red-950/20 rounded-lg border border-red-200 dark:border-red-900 mb-4">
+                <p className="text-sm font-semibold text-red-700 dark:text-red-400 mb-2">NO WARRANTIES OR GUARANTEES</p>
+                <p className="text-sm text-muted-foreground mb-3">
+                  While we make every reasonable effort to protect your privacy and have designed our system with security
+                  as a core principle, <strong>WE MAKE NO WARRANTIES OR GUARANTEES REGARDING DATA SECURITY OR PRIVACY</strong>.
+                  Despite our best efforts, bugs, vulnerabilities, or unforeseen security issues may exist in the codebase
+                  that could potentially lead to data exposure.
+                </p>
+                <p className="text-sm text-muted-foreground mb-3">
+                  <strong>YOU USE THE SERVICE AT YOUR OWN RISK.</strong> We are not liable for any data breaches, unauthorized
+                  access, privacy violations, or data leaks that may occur despite our security measures, whether due to:
+                </p>
+                <ul className="text-sm text-muted-foreground space-y-1 ml-4 mb-3">
+                  <li>• Software bugs or coding errors</li>
+                  <li>• Security vulnerabilities in our code or dependencies</li>
+                  <li>• Third-party service breaches (OpenAI, Stripe, Sentry, etc.)</li>
+                  <li>• Infrastructure failures or attacks</li>
+                  <li>• Human error in configuration or deployment</li>
+                  <li>• Any other unforeseen circumstances</li>
+                </ul>
+              </div>
+
+              <p className="text-muted-foreground mb-3">
+                <strong>Transparency & Verification:</strong> We provide full transparency through our open-source codebase
+                to allow you to independently verify our security claims and make informed decisions:
               </p>
-              <p className="text-muted-foreground mt-2">
-                <strong>For highly sensitive or confidential information, we recommend:</strong>
+              <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-4 mb-3">
+                <li>Review our <a href="/security" className="text-primary underline">Security Architecture documentation</a></li>
+                <li>Inspect the <a href="https://github.com/SanderVreeken/masqify" target="_blank" rel="noopener noreferrer" className="text-primary underline">complete source code on GitHub</a></li>
+                <li>Read our <a href="https://github.com/SanderVreeken/masqify/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" className="text-primary underline">Security Policy (SECURITY.md)</a></li>
+                <li>Understand exactly how data flows through the system</li>
+              </ul>
+
+              <p className="text-muted-foreground mt-3">
+                <strong>For highly sensitive or confidential information, we strongly recommend:</strong>
               </p>
               <ul className="list-disc list-inside text-muted-foreground space-y-1 ml-4 mt-2">
-                <li>Reviewing the source code to understand exactly how data flows through the system</li>
-                <li>Understanding that data temporarily passes through third-party AI services</li>
-                <li>Exercising caution and using your own judgment about what information to process</li>
-                <li>Considering whether this Service is appropriate for your specific use case</li>
+                <li>Thoroughly reviewing the source code before use</li>
+                <li>Understanding that sanitized data still passes through third-party AI services (OpenAI)</li>
+                <li>Exercising extreme caution and using your own professional judgment</li>
+                <li>Considering whether AI assistance is appropriate for your specific use case and compliance requirements</li>
+                <li>Consulting with your legal/compliance team before processing regulated or classified information</li>
               </ul>
             </section>
 
