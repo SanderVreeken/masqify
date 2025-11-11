@@ -85,7 +85,7 @@ export async function initiateAccountDeletion(): Promise<ActionResult> {
 
     // Send confirmation email with both HTML and plain text versions
     await resend.emails.send({
-      from: 'Masqify <hello@masqify.io>',
+      from: 'Masqify <hello@notifications.masqify.io>',
       to: userEmail,
       subject: 'Confirm Account Deletion - Masqify',
       html: DeleteAccountEmail(userName, confirmationUrl, balance),

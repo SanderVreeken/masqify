@@ -24,7 +24,7 @@ export const auth = betterAuth({
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
       await resend.emails.send({
-        from: 'Masqify <hello@masqify.io>',
+        from: 'Masqify <hello@notifications.masqify.io>',
         to: user.email,
         subject: 'Verify your email address',
         html: VerifyEmail(user.name, url),
@@ -41,7 +41,7 @@ export const auth = betterAuth({
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
       await resend.emails.send({
-        from: 'Masqify <hello@masqify.io>',
+        from: 'Masqify <hello@notifications.masqify.io>',
         to: user.email,
         subject: 'Reset your password',
         html: ResetPasswordEmail(user.name, url),

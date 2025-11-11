@@ -5,6 +5,13 @@ All notable changes to Masqify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.8] - 2025-11-11
+
+### Changed
+- Updated email sender addresses from hello@masqify.io to hello@notifications.masqify.io for all notification emails
+- Updated authentication emails (email verification, password reset)
+- Updated account management emails (account deletion confirmation, email change verification)
+
 ## [0.1.7] - 2025-11-10
 
 ### Added
