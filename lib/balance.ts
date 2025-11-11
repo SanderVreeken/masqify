@@ -125,6 +125,7 @@ export async function createPendingPayment(
     providerTransactionId,
     metadata: null,
     createdAt: new Date(),
+    completedAt: null,
     updatedAt: new Date(),
   });
 
