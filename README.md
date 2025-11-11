@@ -396,5 +396,5 @@ See [LICENSE.txt](LICENSE.txt) for the full license text.
 <div align="center">
   <strong>Built with privacy in mind 🔒</strong>
   <br><br>
-  <sub>Version 0.1.12 | Made with ❤️ by Sander Vreeken</sub>
+  <sub>Version 0.1.13 | Made with ❤️ by Sander Vreeken</sub>
 </div>
