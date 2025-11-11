@@ -5,6 +5,8 @@ import { user } from "@/lib/db/auth-schema"
 import { eq, and, gt } from "drizzle-orm"
 import { auth } from "@/lib/auth"
 
+const appUrl = process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || "https://masqify.io"
+
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
@@ -12,7 +14,7 @@ export async function GET(request: NextRequest) {
 
     if (!token) {
       return NextResponse.redirect(
-        new URL("/account?error=invalid-token", request.url)
+        new URL("/account?error=invalid-token", appUrl)
       )
     }
 
@@ -26,7 +28,7 @@ export async function GET(request: NextRequest) {
 
     if (!verificationRecord) {
       return NextResponse.redirect(
-        new URL("/account?error=token-expired", request.url)
+        new URL("/account?error=token-expired", appUrl)
       )
     }
 
@@ -37,7 +39,7 @@ export async function GET(request: NextRequest) {
 
     if (!userRecord) {
       return NextResponse.redirect(
-        new URL("/account?error=user-not-found", request.url)
+        new URL("/account?error=user-not-found", appUrl)
       )
     }
 
@@ -59,12 +61,12 @@ export async function GET(request: NextRequest) {
 
     // Redirect to a confirmation page
     return NextResponse.redirect(
-      new URL("/?deleted=true", request.url)
+      new URL("/?deleted=true", appUrl)
     )
   } catch (error) {
     console.error("Account deletion confirmation error:", error)
     return NextResponse.redirect(
-      new URL("/account?error=deletion-failed", request.url)
+      new URL("/account?error=deletion-failed", appUrl)
     )
   }
 }

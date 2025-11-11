@@ -5,6 +5,12 @@ All notable changes to Masqify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.12] - 2025-11-11
+
+### Fixed
+- Fixed account deletion confirmation redirects routing to localhost instead of production domain in `app/api/account/delete/confirm/route.ts`
+- Updated all redirect URLs to use configured `APP_URL` environment variable instead of relying on incoming request URL
+
 ## [0.1.11] - 2025-11-11
 
 ### Fixed
