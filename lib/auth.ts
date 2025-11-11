@@ -11,12 +11,11 @@ import { ResetPasswordEmail, ResetPasswordEmailText } from "./emails/reset-passw
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const appUrl = process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || "https://masqify.io";
+
 export const auth = betterAuth({
-  baseURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-  trustedOrigins: [
-    "http://localhost:3000",
-    "https://masqify.io"
-  ],
+  baseURL: appUrl,
+  trustedOrigins: [appUrl],
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,

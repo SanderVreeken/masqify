@@ -81,7 +81,7 @@ export async function initiateAccountDeletion(): Promise<ActionResult> {
     })
 
     // Create confirmation URL
-    const confirmationUrl = `${process.env.NEXT_PUBLIC_APP_URL}/api/account/delete/confirm?token=${token}`
+    const confirmationUrl = `${process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://masqify.io'}/api/account/delete/confirm?token=${token}`
 
     // Send confirmation email with both HTML and plain text versions
     await resend.emails.send({

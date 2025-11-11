@@ -9,7 +9,7 @@ afterEach(() => {
 
 // Mock environment variables for tests
 process.env.BETTER_AUTH_SECRET = 'test-secret-key-for-testing-only'
-process.env.BETTER_AUTH_URL = 'http://localhost:3000'
+process.env.APP_URL = 'http://localhost:3000'
 process.env.NEXT_PUBLIC_APP_URL = 'http://localhost:3000'
 process.env.DATABASE_URL = 'postgres://test:test@localhost:5432/test'
 process.env.OPENAI_API_KEY = 'sk-test-key'

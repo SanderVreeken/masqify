@@ -320,7 +320,7 @@ export async function updateEmail(formData: FormData): Promise<ActionResult> {
     })
 
     // Generate verification URL
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+    const baseUrl = process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || "https://masqify.io"
     const verificationUrl = `${baseUrl}/verify-email-change?token=${token}&id=${verificationId}`
 
     // Send verification email to the NEW email address

@@ -5,6 +5,24 @@ All notable changes to Masqify will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.11] - 2025-11-11
+
+### Fixed
+- Fixed email confirmation links routing to localhost instead of production domain
+- Consolidated environment variables from 6 URL-related variables to 2 (`APP_URL` and `NEXT_PUBLIC_APP_URL`)
+- Updated all server-side code to prioritize `APP_URL` with proper fallbacks
+- Removed redundant `BETTER_AUTH_URL`, `NEXT_PUBLIC_BETTER_AUTH_URL`, `STRIPE_SUCCESS_URL`, and `STRIPE_CANCEL_URL` environment variables
+
+### Changed
+- Email confirmation URLs (account deletion, email change verification) now use consolidated `APP_URL`
+- Better Auth configuration now uses `APP_URL` for server-side operations
+- Stripe checkout URLs now derive from `APP_URL` instead of separate variables
+- Email template logo URLs updated to use consolidated environment variables
+
+### Security
+- Better Auth `trustedOrigins` now dynamically uses only the `APP_URL` value instead of hardcoded origins
+- Improved CORS security by removing static origin list, ensuring trusted origin always matches deployment URL
+
 ## [0.1.10] - 2025-11-11
 
 ### Fixed

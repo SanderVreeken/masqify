@@ -70,7 +70,7 @@ export async function register(formData: FormData): Promise<ActionResult> {
         name: validatedData.name,
         email: validatedData.email,
         password: validatedData.password,
-        callbackURL: `${process.env.BETTER_AUTH_URL}/login?verified=true`
+        callbackURL: `${process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://masqify.io'}/login?verified=true`
       },
     })
 

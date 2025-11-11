@@ -66,8 +66,9 @@ export async function POST(req: NextRequest) {
     const amountInCents = Math.round(amount * 100);
 
     // Build success and cancel URLs with dynamic parameters
-    const baseSuccessUrl = process.env.STRIPE_SUCCESS_URL || `${process.env.NEXT_PUBLIC_APP_URL}/editor?payment=success`;
-    const baseCancelUrl = process.env.STRIPE_CANCEL_URL || `${process.env.NEXT_PUBLIC_APP_URL}/editor?payment=cancelled`;
+    const appUrl = process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://masqify.io';
+    const baseSuccessUrl = process.env.STRIPE_SUCCESS_URL || `${appUrl}/editor?payment=success`;
+    const baseCancelUrl = process.env.STRIPE_CANCEL_URL || `${appUrl}/editor?payment=cancelled`;
 
     // Append amount to success URL (handle both ?payment=success and base URLs)
     const successUrl = baseSuccessUrl.includes('?')
