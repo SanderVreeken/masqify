@@ -76,7 +76,7 @@ export async function register(formData: FormData): Promise<ActionResult> {
 
     return {
       success: true,
-      message: "Account created successfully! Please check your email to verify your account.",
+      message: "Account created successfully! Please check your email to verify your account. Our domain is new, so some mail providers may mistakenly place our messages in Spam or Promotions. Please check there if you don't see the email within a few minutes and mark it as \"Not Spam\" — it helps ensure future messages reach your inbox.",
     }
   } catch (error) {
     // Handle validation errors

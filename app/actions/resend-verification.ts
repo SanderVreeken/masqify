@@ -53,7 +53,7 @@ export async function resendVerificationEmail(email: string): Promise<ActionResu
 
     return {
       success: true,
-      message: "Verification email sent! Please check your inbox.",
+      message: "Verification email sent! Please check your inbox. Our domain is new, so some mail providers may mistakenly place our messages in Spam or Promotions. Please check there if you don't see the email within a few minutes and mark it as \"Not Spam\" — it helps ensure future messages reach your inbox.",
     }
   } catch (error) {
     console.error("Resend verification error:", error)

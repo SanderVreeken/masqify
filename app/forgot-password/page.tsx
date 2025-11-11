@@ -70,7 +70,7 @@ export default function ForgotPasswordPage() {
                 </p>
               </div>
               <p className="text-muted-foreground mt-4" style={{ fontSize: 'clamp(0.7rem, 0.875vw + 0.1rem, 0.875rem)' }}>
-                Didn't receive the email? Check your spam folder or try again.
+                Our domain is new, so some mail providers may mistakenly place our messages in Spam or Promotions. Please check there if you don't see the email within a few minutes and mark it as "Not Spam" — it helps ensure future messages reach your inbox.
               </p>
             </CardContent>
             <CardFooter className="flex-col gap-3 sm:gap-4">

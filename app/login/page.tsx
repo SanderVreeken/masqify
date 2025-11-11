@@ -50,7 +50,7 @@ function LoginForm() {
 
     if (registered === 'true') {
       toast.success('Account created successfully!', {
-        description: 'Please check your email to verify your account.'
+        description: 'Please check your email to verify your account. Our domain is new, so some mail providers may mistakenly place our messages in Spam or Promotions. Please check there if you don\'t see the email within a few minutes and mark it as "Not Spam" — it helps ensure future messages reach your inbox.'
       })
       // Clean up URL by removing the registered parameter
       const newUrl = new URL(window.location.href)
